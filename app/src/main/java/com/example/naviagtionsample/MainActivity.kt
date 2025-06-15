@@ -44,13 +44,13 @@ fun MyApp(paddingValues: PaddingValues) {
                 modifier = Modifier, paddingValues,
                 name = name,
                 navigateToFirstScreen = {navController.navigate("firstscreen")},
-                navigateToThirdScreen = {navController.navigate("thirdscreen")}
-
+                navigateToThirdScreen = {age -> navController.navigate("thirdscreen/$age")}
             )
         }
 
-        composable(route = "thirdscreen") {
-            ThirdScreen(paddingValues) {
+        composable(route = "thirdscreen/{age}") {
+            val age = it.arguments?.getString("age")
+            ThirdScreen(paddingValues, age ?: "0") {
                 navController.navigate("firstscreen")
             }
         }

@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +26,7 @@ fun SecondScreen(
     paddingValues: PaddingValues,
     name: String,
     navigateToFirstScreen: () -> Unit,
-    navigateToThirdScreen: () -> Unit
+    navigateToThirdScreen: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -36,6 +39,12 @@ fun SecondScreen(
         Spacer(modifier = modifier.height(20.dp))
         Spacer(modifier = modifier.height(20.dp))
 
+        val age = remember { mutableStateOf("") }
+
+        OutlinedTextField(value = age.value, onValueChange = {
+            age.value = it
+        })
+
         Button(onClick = {
             navigateToFirstScreen()
         }) {
@@ -43,7 +52,7 @@ fun SecondScreen(
         }
 
         Button(onClick = {
-            navigateToThirdScreen()
+            navigateToThirdScreen(age.value)
         }) {
             Text("Move to Third Screen")
         }

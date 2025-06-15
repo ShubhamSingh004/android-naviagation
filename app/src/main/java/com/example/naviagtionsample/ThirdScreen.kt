@@ -13,13 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ThirdScreen(paddingValues: PaddingValues, navigateToFirstScreen:()->Unit){
+fun ThirdScreen(paddingValues: PaddingValues, age: String, navigateToFirstScreen:()->Unit){
     Column(modifier = Modifier
         .padding(paddingValues)
         .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Third Screen", fontSize = 26.sp)
+        Text("Your age is $age")
         Button(onClick = {
             navigateToFirstScreen()
         }) {
