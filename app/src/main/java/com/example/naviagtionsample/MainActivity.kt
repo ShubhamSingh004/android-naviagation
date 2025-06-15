@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NaviagtionSampleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyApp(modifier = Modifier, innerPadding)
+                    MyApp(innerPadding)
                 }
             }
         }
@@ -29,18 +29,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp(modifier: Modifier, paddingValues: PaddingValues) {
+fun MyApp(paddingValues: PaddingValues) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "firstscreen"){
         composable(route = "firstscreen"){
-            FirstScreen(modifier = Modifier, paddingValues) {
-                navController.navigate("secondscreen")
+            FirstScreen(modifier = Modifier, paddingValues) { name->
+                navController.navigate("secondscreen/$name")
             }
         }
 
-        composable(route = "secondscreen"){
+        composable(route = "secondscreen/{name}"){
+            val name = it.arguments?.getString("name") ?: "No Name"
             SecondScreen(
                 modifier = Modifier, paddingValues,
+                name = name,
                 navigateToFirstScreen = {navController.navigate("firstscreen")},
                 navigateToThirdScreen = {navController.navigate("thirdscreen")}
 
@@ -48,7 +50,7 @@ fun MyApp(modifier: Modifier, paddingValues: PaddingValues) {
         }
 
         composable(route = "thirdscreen") {
-            ThirdScreen(modifier = Modifier, paddingValues) {
+            ThirdScreen(paddingValues) {
                 navController.navigate("firstscreen")
             }
         }

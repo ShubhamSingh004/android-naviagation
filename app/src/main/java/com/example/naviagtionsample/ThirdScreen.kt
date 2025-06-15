@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ThirdScreen(modifier: Modifier, paddingValues: PaddingValues, navigateToFirstScreen:()->Unit){
+fun ThirdScreen(paddingValues: PaddingValues, navigateToFirstScreen:()->Unit){
     Column(modifier = Modifier
         .padding(paddingValues)
         .fillMaxSize(),

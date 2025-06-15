@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun FirstScreen(
     modifier: Modifier, paddingValues: PaddingValues,
-    navigationToSecondScreen: () -> Unit
+    navigationToSecondScreen: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -44,7 +44,9 @@ fun FirstScreen(
         Text("Your name is ${name.value}")
 
         Button(onClick = {
-            navigationToSecondScreen()
+            if(name.value != "")
+                navigationToSecondScreen(name.value)
+            else navigationToSecondScreen("No One")
         }) {
             Text("Move to Next Screen")
         }
@@ -56,7 +58,9 @@ fun FirstScreen(
 @Composable
 fun FirstPreview() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        FirstScreen(modifier = Modifier, paddingValues = innerPadding, {})
+        FirstScreen(modifier = Modifier, paddingValues = innerPadding){
+
+        }
     }
 
 }
