@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NaviagtionSampleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    MyApp(modifier = Modifier, innerPadding)
                 }
             }
         }
@@ -32,8 +33,16 @@ class MainActivity : ComponentActivity() {
 fun MyApp(modifier: Modifier, paddingValues: PaddingValues) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "firstscreen"){
-        composable(route = "firstscreen"){}
-        composable(route = "secondscreen"){}
+        composable(route = "firstscreen"){
+            FirstScreen(modifier = Modifier, paddingValues) {
+                navController.navigate("secondscreen")
+            }
+        }
+        composable(route = "secondscreen"){
+            SecondScreen(modifier = Modifier, paddingValues) {
+                navController.navigate("firstscreen")
+            }
+        }
 
     }
 }
