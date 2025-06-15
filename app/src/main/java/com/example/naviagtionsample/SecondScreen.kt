@@ -20,8 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SecondScreen(modifier: Modifier, paddingValues: PaddingValues,
-                 navigateToFirstScreen: ()-> Unit) {
+fun SecondScreen(
+    modifier: Modifier, paddingValues: PaddingValues,
+    navigateToFirstScreen:()-> Unit,
+    navigateToThirdScreen: () -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -37,7 +40,13 @@ fun SecondScreen(modifier: Modifier, paddingValues: PaddingValues,
         Button(onClick = {
             navigateToFirstScreen()
         }) {
-            Text("Move to Previous Screen")
+            Text("Move to First Screen")
+        }
+
+        Button(onClick = {
+            navigateToThirdScreen()
+        }) {
+            Text("Move to Third Screen")
         }
     }
 }
@@ -47,7 +56,7 @@ fun SecondScreen(modifier: Modifier, paddingValues: PaddingValues,
 @Composable
 fun SecondPreview() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        SecondScreen(modifier = Modifier, paddingValues = innerPadding, {})
+        SecondScreen(modifier = Modifier, paddingValues = innerPadding, {}, {})
     }
 
 }

@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -38,8 +37,18 @@ fun MyApp(modifier: Modifier, paddingValues: PaddingValues) {
                 navController.navigate("secondscreen")
             }
         }
+
         composable(route = "secondscreen"){
-            SecondScreen(modifier = Modifier, paddingValues) {
+            SecondScreen(
+                modifier = Modifier, paddingValues,
+                navigateToFirstScreen = {navController.navigate("firstscreen")},
+                navigateToThirdScreen = {navController.navigate("thirdscreen")}
+
+            )
+        }
+
+        composable(route = "thirdscreen") {
+            ThirdScreen(modifier = Modifier, paddingValues) {
                 navController.navigate("firstscreen")
             }
         }
